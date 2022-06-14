@@ -1,10 +1,14 @@
 from tkinter import *
 import random
+import pygame
+#import time
+
 
 Streak = 0
 note = ["C","C#","D", "D#","E","F","F#","G","G#","A","A#","B"]
 Ran_note = random.choice(note)
 print(Ran_note)
+
 
 
 def button_note(self):
@@ -31,6 +35,8 @@ def randomize():
     global Ran_note
     Ran_note = random.choice(note)
     print("Now the Note is",Ran_note)
+    pygame.mixer.music.load(Ran_note + ".mp3")
+    pygame.mixer.music.play()
 
 
     
@@ -38,6 +44,10 @@ def randomize():
 root = Tk()
 root.title("Random Notes Generator")
 root.geometry("600x800")
+
+pygame.mixer.init()
+pygame.mixer.music.load(Ran_note + ".mp3")
+pygame.mixer.music.play()
 
 label1 = Label(root, text="")
 label1.place(x=290, y=360)
