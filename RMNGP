@@ -1,45 +1,46 @@
 from tkinter import *
 import random
 import pygame
-#import time
+import time
+import threading
 
 
 Streak = 0
-note = ["C","C#","D", "D#","E","F","F#","G","G#","A","A#","B"]
+note = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 Ran_note = random.choice(note)
 print(Ran_note)
-
 
 
 def button_note(self):
     global Streak
     if Ran_note == self:
-        
         Streak += 1
-        print("\nCORRECTO!")
-        print("Your Streak is",Streak)
-        label1.configure(text=Ran_note)
-        label2.configure(text="CORRECTO!")  
+        label1.configure(text=Ran_note)        # no responde a time sleep
+        label2.configure(text="CORRECTO!")
         label3.configure(text=Streak)
+        print("\nCORRECTO!")
+        print("Your Streak is", Streak)
         randomize()
 
     else:
         Streak = 0
         print("\nINCORRECTO")
+        print("The note is", Ran_note)
         label1.configure(text=Ran_note)
         label2.configure(text="INCORRECTO")
         label3.configure(text=Streak)
-        
+
 
 def randomize():
+
     global Ran_note
     Ran_note = random.choice(note)
-    print("Now the Note is",Ran_note)
+    # print("Now the Note is", Ran_note)    #
+    pygame.mixer.music.play()
+    time.sleep(4)
     pygame.mixer.music.load(Ran_note + ".mp3")
     pygame.mixer.music.play()
 
-
-    
 
 root = Tk()
 root.title("Random Notes Generator")
@@ -56,30 +57,30 @@ label2.place(x=260, y=400)
 label3 = Label(root, text="")
 label3.place(x=260, y=440)
 
-boton1 = Button(root, text=" C ", command=lambda: button_note("C"))
-boton1.place(x=150, y=500)
-boton2 = Button(root,text="C#", command=lambda: button_note("C#"))
-boton2.place(x=175, y=500)
-boton3 = Button(root,text=" D ", command=lambda: button_note("D"))
-boton3.place(x=200, y=500)
-boton4 = Button(root,text="D#", command=lambda: button_note("D#"))
-boton4.place(x=225, y=500)
-boton5 = Button(root, text=" E ", command=lambda: button_note("E"))
-boton5.place(x=250, y=500)
-boton6 = Button(root, text=" F ", command=lambda: button_note("F"))
-boton6.place(x=275, y=500)
-boton7 = Button(root, text="F#", command=lambda: button_note("F#"))
-boton7.place(x=300, y=500)
-boton8 = Button(root,text=" G ", command=lambda: button_note("G"))
-boton8.place(x=325, y=500)
-boton9 = Button(root,text="G#", command=lambda: button_note("G#"))
-boton9.place(x=350, y=500)
-boton10 = Button(root, text=" A ", command=lambda: button_note("A"))
-boton10.place(x=375, y=500)
-boton11 = Button(root, text="A#", command=lambda: button_note("A#"))
-boton11.place(x=400, y=500)
-boton12 = Button(root, text=" B ", command=lambda: button_note("B"))
-boton12.place(x=425, y=500)
+button1 = Button(root, text=" C ", command=lambda: button_note("C"))
+button1.place(x=150, y=500)
+button2 = Button(root,text="C#", command=lambda: button_note("C#"))
+button2.place(x=175, y=500)
+button3 = Button(root,text=" D ", command=lambda: button_note("D"))
+button3.place(x=200, y=500)
+button4 = Button(root,text="D#", command=lambda: button_note("D#"))
+button4.place(x=225, y=500)
+button5 = Button(root, text=" E ", command=lambda: button_note("E"))
+button5.place(x=250, y=500)
+button6 = Button(root, text=" F ", command=lambda: button_note("F"))
+button6.place(x=275, y=500)
+button7 = Button(root, text="F#", command=lambda: button_note("F#"))
+button7.place(x=300, y=500)
+button8 = Button(root,text=" G ", command=lambda: button_note("G"))
+button8.place(x=325, y=500)
+button9 = Button(root,text="G#", command=lambda: button_note("G#"))
+button9.place(x=350, y=500)
+button10 = Button(root, text=" A ", command=lambda: button_note("A"))
+button10.place(x=375, y=500)
+button11 = Button(root, text="A#", command=lambda: button_note("A#"))
+button11.place(x=400, y=500)
+button12 = Button(root, text=" B ", command=lambda: button_note("B"))
+button12.place(x=425, y=500)
 
 
 root.mainloop()
