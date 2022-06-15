@@ -15,11 +15,13 @@ def button_note(self):
     global Streak
     if Ran_note == self:
         Streak += 1
-        label1.configure(text=Ran_note)        # no responde a time sleep
-        label2.configure(text="CORRECTO!")
+        # label1.configure(text=Ran_note)        # no responde a time sleep
+        # label2.configure(text="CORRECTO!")
         label3.configure(text=Streak)
         print("\nCORRECTO!")
         print("Your Streak is", Streak)
+        pygame.mixer.music.play()
+        time.sleep(3.5)
         randomize()
 
     else:
@@ -29,15 +31,15 @@ def button_note(self):
         label1.configure(text=Ran_note)
         label2.configure(text="INCORRECTO")
         label3.configure(text=Streak)
+        root.after(1000, lambda: label1.config(text=""))
+        root.after(1000, lambda: label2.config(text=""))
 
 
 def randomize():
 
     global Ran_note
     Ran_note = random.choice(note)
-    # print("Now the Note is", Ran_note)    #
-    pygame.mixer.music.play()
-    time.sleep(4)
+    print("Now the Note is", Ran_note)    #
     pygame.mixer.music.load(Ran_note + ".mp3")
     pygame.mixer.music.play()
 
@@ -55,7 +57,7 @@ label1.place(x=290, y=360)
 label2 = Label(root, text="")
 label2.place(x=260, y=400)
 label3 = Label(root, text="")
-label3.place(x=260, y=440)
+label3.place(x=300, y=440)
 
 button1 = Button(root, text=" C ", command=lambda: button_note("C"))
 button1.place(x=150, y=500)
